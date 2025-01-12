@@ -6,7 +6,7 @@
         "laravel",
         "wallet-transfer"
     ],
-    "homepage": "https://github.com/thegamergroup/wallet-transfer",
+    "homepage": "https://github.com/T-captain",
     "license": "MIT",
     "authors": [
         {
@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.4",
+        "php": "^8.2",
         "spatie/laravel-package-tools": "^1.16",
         "illuminate/contracts": "^10.0||^11.0"
     },
@@ -31,7 +31,12 @@
     "autoload": {
         "psr-4": {
             "TheGamerGroup\\WalletTransfer\\": "src/",
-            "TheGamerGroup\\WalletTransfer\\Database\\Factories\\": "database/factories/"
+            "TheGamerGroup\\WalletTransfer\\Database\\Factories\\": "database/factories/",
+            "TheGamerGroup\\WalletTransfer\\Commands\\": "app/Console/Commands/",
+            "TheGamerGroup\\WalletTransfer\\Helpers\\": "app/Helpers/",
+            "TheGamerGroup\\WalletTransfer\\Modules\\": "app/Modules/",
+            "TheGamerGroup\\WalletTransfer\\Jobs\\": "app/Jobs/",
+            "TheGamerGroup\\WalletTransfer\\Gamelist\\": "app/Gamelist/"
         }
     },
     "autoload-dev": {

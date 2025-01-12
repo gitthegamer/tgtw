@@ -1,0 +1,4 @@
+php ./configure.php
+
+
+composer dump-autoload
