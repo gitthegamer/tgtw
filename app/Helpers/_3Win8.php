@@ -12,6 +12,7 @@ class _3Win8
 {
     public static function create(Member $member)
     {
+        //test
         $password = SELF::randomPassword();
 
         $response = _3WIN8Controller::init("user_register", [
