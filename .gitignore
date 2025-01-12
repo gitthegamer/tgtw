@@ -30,3 +30,7 @@ phpstan.neon
 testbench.yaml
 /docs
 /coverage
+
+# DS-Store
+.DS_Store
+*/.DS_Store
