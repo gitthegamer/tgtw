@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::any('/mega888', [_MG88Controller::class, 'callback']);
 Route::any('/ace333', [_ACE333Controller::class, 'callback']);
 Route::any('/nextspin', [_NextSpinController::class, 'callback']);
-Route::any('/cmd368', [_CMD368Controller::class, 'callback']);
+// Route::any('/cmd368', [_CMD368Controller::class, 'callback']);
 
 Route::post('/global', [APIController::class, 'global']);
 Route::post('/login', [APIController::class, 'login']);
