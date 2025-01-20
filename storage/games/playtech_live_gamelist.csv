@@ -1,0 +1,119 @@
+LIVE,Baccarat,百家乐,baccarat_sicbo,ubal,bal_minibaccarat
+LIVE,Baccarat NC,免佣百家乐,baccarat_sicbo,ubal,nc_bal_minibaccarat
+LIVE,Dragon Tiger,龙虎,baccarat_sicbo,dtl,dtl_dragontiger
+LIVE,Grand Baccarat,豪华百家乐,baccarat_sicbo,ubal,bal_grandbaccarat
+LIVE,Grand Baccarat NC,免佣豪华百家乐,baccarat_sicbo,ubal,nc_bal_grandbaccarat
+LIVE,Lounge 7 Seat Baccarat,7席百家乐,baccarat_sicbo,ubal,7bal_loungebaccarat
+LIVE,Lounge 7 Seat Baccarat NC,免佣7席百家乐,baccarat_sicbo,ubal,nc_7bal_loungebaccarat
+LIVE,Prestige Baccarat,声望百家乐,baccarat_sicbo,ubal,bal_prestigeminibac
+LIVE,Prestige Baccarat NC,免佣声望百家乐,baccarat_sicbo,ubal,nc_bal_prestigeminibac
+LIVE,SicBo Deluxe,骰宝豪华版,baccarat_sicbo,sbdl,sbdl_deluxesicbo
+LIVE,‎Soho Baccarat,苏豪百家乐,baccarat_sicbo,ubal,bal_sohobaccarat
+LIVE,Soho Baccarat NC,免佣苏豪百家乐,baccarat_sicbo,ubal,nc_bal_sohobaccarat
+LIVE,Speed Baccarat,急速百家乐,baccarat_sicbo,ubal,bal_goldenbac1
+LIVE,Speed Baccarat NC,免佣急速百家乐,baccarat_sicbo,ubal,nc_bal_goldenbac1
+LIVE,VIP Baccarat,VIP百家乐,baccarat_sicbo,ubal,bal_vipbaccarat
+LIVE,VIP Baccarat NC,免佣VIP百家乐,baccarat_sicbo,ubal,nc_bal_vipbaccarat
+LIVE,Andar Bahar Live,真人安达,baccarat_sicbo,abl,abl_andarbahar
+LIVE,Bet on Baccarat Live,真人赌百家乐,baccarat_sicbo,bs_bal,bal_betslipbaccarat
+LIVE,Bet On Dragon Tiger Live,真人赌龙虎,baccarat_sicbo,bs_dtl,bs_dtl_betondragontiger
+LIVE,Japanese Squeeze Baccarat,日本咪牌百家乐,baccarat_sicbo,ubal,bal_squeezebaccarat
+LIVE,Japanese Squeeze Baccarat NC,日本免佣咪牌百家乐,baccarat_sicbo,ubal,nc_bal_squeezebaccarat
+LIVE,Ru Yi Speed Baccarat,如意急速百家乐,baccarat_sicbo,ubal,7bal_speedbaccarat
+LIVE,Ru Yi Speed Baccarat NC,如意免佣急速百家乐,baccarat_sicbo,ubal,nc_7bal_speedbaccarat
+LIVE,Speed Baccarat 1,急速百家乐1,baccarat_sicbo,ubal,bal_speedbaccarat1
+LIVE,Speed Baccarat 1 NC,免佣急速百家乐1,baccarat_sicbo,ubal,nc_bal_speedbaccarat1
+LIVE,Baccarat Brasileira,巴西百家乐,baccarat_sicbo,ubal,bal_speedbaccarat2
+LIVE,Baccarat Brasileira NC,免佣巴西百家乐,baccarat_sicbo,ubal,nc_bal_speedbaccarat2
+LIVE,Sic Bo,骰宝,baccarat_sicbo,sbl,sbl_sicbo
+LIVE,Italian Cashback Blackjack,真人意大利返现21点,blackjack,cbjl,abjl_italianbj
+LIVE,Alexandrite Blackjack,变石21点,blackjack,bjl,bjl_alexandritebj
+LIVE,All Bets Blackjack,全押注21点,blackjack,abjl,abjl_allbetsblackjack
+LIVE,Blackjack 1,21点,blackjack,bjl,bjl_blackjack1
+LIVE,Blackjack Italiano 1,意大利语21点,blackjack,bjl,bjl_italianobj1
+LIVE,Blackjack Italiano 2,意大利语21点,blackjack,bjl,bjl_italianobj2
+LIVE,Blackjack Italiano VIP,意大利语21点VIP,blackjack,bjl,bjl_blackjackitalianovip
+LIVE,Deutsches Blackjack,德语21点,blackjack,bjl,bjl_deutschbj
+LIVE,Grand Blackjack,豪华21点,blackjack,bjl,bjl_grandbj
+LIVE,Lounge Blackjack 8,21点,blackjack,bjl,bjl_loungebj8
+LIVE,Blackjack 1,21点,blackjack,bjl,bjl_blackjack1
+LIVE,Blackjack 2,21点,blackjack,bjl,bjl_blackjack2
+LIVE,Blackjack 3,21点,blackjack,bjl,bjl_blackjack3
+LIVE,Blackjack 4,21点,blackjack,bjl,bjl_blackjack4
+LIVE,Blackjack 5,21点,blackjack,bjl,bjl_blackjack5
+LIVE,Blackjack 6,21点,blackjack,bjl,bjl_blackjack6
+LIVE,Blackjack 7,21点,blackjack,bjl,bjl_blackjack7
+LIVE,Blackjack 8,21点,blackjack,bjl,bjl_blackjack8
+LIVE,Blackjack 9,21点,blackjack,bjl,bjl_blackjack9
+LIVE,Majority Rules Speed Blackjack,急速多数规则21点,blackjack,msbjl,msbjl_speedbj
+LIVE,Royale Blackjack 1,皇家21点,blackjack,bjl,bjl_royalebj1
+LIVE,Royale Blackjack 2,皇家21点,blackjack,rbj,bjl_royale2
+LIVE,Royale Blackjack 3,皇家21点,blackjack,bjl,bjl_royalebj3
+LIVE,Royale Blackjack 4,皇家21点,blackjack,bjl,bjl_royale4
+LIVE,Royale Blackjack 5,皇家21点,blackjack,bjl,bjl_royalebj5
+LIVE,Sette E Mezzo,7点半,blackjack,7eml,7eml_7emezzo
+LIVE,Soho All Bets Blackjack,苏豪全押注21点,blackjack,abjl,abjl_allbetsblackjack2
+LIVE,Soho Blackjack 1,苏豪21点,blackjack,bjl,bjl_sohobj1
+LIVE,Soiree Blackjack 1,晚会21点,blackjack,bjl,bjl_soireebj
+LIVE,Soirée Elite Blackjack 1,精英晚会21点,blackjack,bjl,bjl_soiree100
+LIVE,Soirée Elite Blackjack 2,精英晚会21点,blackjack,bjl,bjl_soiree200
+LIVE,Soirée Elite VIP Blackjack,精英晚会21点VIP,blackjack,bjl,bjl_soiree500
+LIVE,Soirée Elite VIP Blackjack 2,精英晚会21点VIP,blackjack,bjl,bjl_soireevip2
+LIVE,Unlimited Blackjack,无限制21点,blackjack,ubjl,ubjl_unlimitedbj
+LIVE,Quantum Blackjack Plus,限量21点升级版,blackjack,qabjlp,qabjl_quantumbj
+LIVE,Mega Fire Blaze Blackjack Live,百万烈焰大奖：21点,blackjack,fbbjl,fbbjl_fireblazebj
+LIVE,Adventures Beyond Wonderland,真人仙境冒险,gameshows,abwl,abwl_wonderland
+LIVE,Buffalo Blitz Live Slots,真人老虎机水牛闪电战,gameshows,bfbl,bfbl_liveslots
+LIVE,God Of Storms Live Slots,真人老虎机风暴之神,gameshows,gosl,aoggosl_godofstorm
+LIVE,Hi-Lo,高低牌,gameshows,hilol,hilo_hilo
+LIVE,Spin a Win,赢利转盘,gameshows,swl,swl_spinawin
+LIVE,Buffalo Blitz España,水牛闪电战西班牙,gameshows,bfbl,bfbl_espanaslots
+LIVE,Spin a Win Wild Live,疯狂赢利转盘,gameshows,swle,swle_spinawinwild
+LIVE,Everybody's Jackpot Live,真人众人彩池,gameshows,ejpl,ejl_everybodysjp
+LIVE,The Greatest Cards Show,最伟大的纸牌秀,gameshows,tgcsl,tgcsl_cardshow
+LIVE,Football Card Showdown Live,真人足球卡牌对决,gameshows,cml,cml_cardmatch
+LIVE,3 Card Brag,三张扑克牌,poker,3brgl,brag_3cardbrag
+LIVE,Casino Hold´em,赌场德州扑克,poker,chel,chel_casinoholdem
+LIVE,Casino Stud Poker,赌场梭哈扑克,poker,cspljpt,cspl_casinostudpoker
+LIVE,Heads up Holdem,单挑德州扑克,poker,huhl,huhl_headsupholdem
+LIVE,Bet on Poker Live,真人赌扑克,Poker,bs_pokl,bs_pokl_betonpoker
+LIVE,Teen Patti Live,真人三张牌,Poker,tpl,tpl_teenpatti
+LIVE,Age of the Gods Bonus Roulette,真人众神时代奖金轮盘,roulette,aogjbrol,rol_aogroulette
+LIVE,American Roulette,美式轮盘,roulette,rodzl,rodzl_doublezero
+LIVE,Brussels Roulette,布鲁塞尔轮盘,roulette,rol,rol_brusselsrol
+LIVE,Casiopea Francesa Ruleta,法国仙后座轮盘,roulette,rofl,rofl_casiopearol
+LIVE,Casiopea Ruleta,仙后座轮盘,roulette,rol,rol_casiopearol
+LIVE,Deutsches Roulette,德国轮盘,roulette,rol,rol_deutschrol
+LIVE,Football French Roulette,足球法式轮盘,roulette,frofl,rofl_livefootballroulette
+LIVE,Football Roulette,足球轮盘,roulette,frol,rol_livefootballrol
+LIVE,French Roulette,法式轮盘,roulette,rofl,rofl_loungerol
+LIVE,Greek Roulette,希腊轮盘,roulette,rol,rol_greekrol
+LIVE,Hindi Roulette,印度语轮盘,roulette,rol,rol_roulette1
+LIVE,Prestige Roulette,声望轮盘,roulette,rol,rol_prestigerol
+LIVE,Prime Slingshot,优质弹珠,roulette,rol,rol_primeslingshot
+LIVE,Quantum Auto Roulette,限量自动轮盘,roulette,qrol,qrol_quantumautorol
+LIVE,Quantum Roulette Live,真人限量轮盘,roulette,qrol,rol_quantumroulette
+LIVE,Quantum Ruleta,限量轮盘,roulette,qrol,qrol_quantumrol
+LIVE,Roleta Brasileira,巴西轮盘,roulette,rol,rol_brazilianrol
+LIVE,Roulette,轮盘,roulette,rol,rol_loungerol
+LIVE,Roulette Italiana,意大利轮盘,roulette,rol,rol_rouletteitaliana
+LIVE,Ruleta Express,快速轮盘,roulette,rol,rol_rulettaexpress
+LIVE,Slingshot,弹珠,roulette,rol,rol_slingshot
+LIVE,Slingshot Ruleta,弹珠轮盘,roulette,rol,rol_ruletaslingshot
+LIVE,Slingshot Ruleta España,西班牙弹珠轮盘,roulette,rol,rol_ruletaslingshot2
+LIVE,Speed Roulette,急速轮盘,roulette,rol,rol_speedrol
+LIVE,Spread Bet Roulette,分散下注轮盘,roulette,sprol,sprol_spreadbetrol
+LIVE,Bucharest Roulette,胜利轮盘,roulette,rol,rol_triumphrol
+LIVE,Bucharest Roulette French,法式胜利轮盘,roulette,rofl,rofl_triumphrol
+LIVE,Turkish Roulette,土耳其语轮盘,roulette,rol,rol_turkishrol
+LIVE,UK Roulette,英国轮盘,roulette,rol,rol_ukrol
+LIVE,Mega Fire Blaze Roulette Live,百万烈焰大奖：真人轮盘,roulette,fbrol,fbrol_fireblazero
+LIVE,x1000 Quantum Roulette,1000倍限量轮盘,roulette,qrodzl,qrodzl_quantumita
+LIVE,Arabic Roulette,阿拉伯轮盘,roulette,rol,rol_arabicroulette
+LIVE,Mega Fire Blaze Ruleta Espana,百万烈焰大奖：轮盘西班牙,roulette,fbrol,fbrol_espanafireblaze
+LIVE,Auto Roulette 2,自动轮盘赌 2,roulette,rol,rol_autoroulette2
+LIVE,Jet Set Racing Roulette Live,竞速轮盘,roulette,jsrrl,jsrrl_racingrol
+LIVE,Mega Fire Blaze Lucky Ball Brasileiro,百万烈焰大奖：幸运彩球巴西,gameshows,fbbl,fbbl_luckyballbr
+LIVE,Jade Baccarat,翡翠百家乐,baccarat_sicbo,ubal,bal_baccaratko
+LIVE,Jade Baccarat NC,免佣翡翠百家乐,baccarat_sicbo,ubal,nc_bal_baccaratko
+LIVE,Big Bad Wolf Live,真人大灰狼,gameshows,bbwl,bbwl_bigbadwolf
