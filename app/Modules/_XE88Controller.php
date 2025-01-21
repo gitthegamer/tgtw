@@ -91,7 +91,6 @@ class _XE88Controller
     protected $endtime;
     protected $perpage;
     
-
     public static function init($function, $params)
     {
         $controller = new _XE88Controller();
@@ -166,7 +165,7 @@ class _XE88Controller
             'params' => json_encode($params),
             'method' => $method,
         ];
-       
+
 
         $log = 'xe88_api_records';
         if ($function == "customreport/playergamelog") {
@@ -199,7 +198,17 @@ class _XE88Controller
 
         $res = curl_exec($ch);
         if (curl_errno($ch)) {
-            return false;
+            $error_msg = curl_error($ch);
+            Log::channel($log)->debug("$time Error: " . $error_msg);
+
+            $logForDB['status'] = ModelsLog::STATUS_ERROR;
+            $logForDB['trace'] = "$time Error: " . $error_msg;
+            ModelsLog::addLog($logForDB);
+            return [
+                'status' => false,
+                'status_message' => "Connection Error",
+                'data' => [],
+            ];
         }
         Log::channel($log)->debug("$time Status Code : " . curl_getinfo($ch, CURLINFO_HTTP_CODE));
         curl_close($ch);
@@ -230,10 +239,10 @@ class _XE88Controller
         }
 
         $logForDB['message'] = $message;
-        
+
         Log::channel($log)->debug("$time Status Message: $message");
 
-        if($response['code'] !== 0){
+        if ($response['code'] !== 0) {
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             ModelsLog::addLog($logForDB);
         }
