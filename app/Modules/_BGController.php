@@ -2,7 +2,9 @@
 
 namespace App\Modules;
 
+use App\Http\Helpers;
 use App\Models\Log as ModelsLog;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class _BGController
@@ -191,6 +193,21 @@ class _BGController
             'method' => $method,
         ];
 
+
+        $log = 'BG_api_records';
+        if ($function == "open.order.agent.query" || $function == "open.sn.video.order.detail") {
+            $log = 'BG_api_ticket_records';
+        }
+        if ($function == "open.balance.transfer" || $function == "open.balance.transfer.query") {
+            $log = 'BG_api_transfer_records';
+        }
+        if ($function == "open.balance.get") {
+            $log = 'BG_api_balance_records';
+        }
+
+        Log::channel($log)->debug("$time URL : " . $this->get_url($function));
+        Log::channel($log)->debug("$time Function : " . $function);
+
         $this->create_param($function, $params);
 
         $body = [
@@ -200,6 +217,7 @@ class _BGController
             "jsonrpc" => "2.0"
         ];
 
+        Log::channel($log)->debug("$time Params : " . json_encode($body));
         try {
             $ch = curl_init($this->get_url($function));
             curl_setopt($ch, CURLOPT_POST, 1);
@@ -208,16 +226,28 @@ class _BGController
             curl_setopt($ch, CURLOPT_POSTFIELDS, 'json=' . json_encode($body));
             $res = curl_exec($ch);
             if (curl_errno($ch)) {
-                return false;
+                $error_msg = curl_error($ch);
+                Log::channel($log)->debug("$time Error: " . $error_msg);
+
+                $logForDB['status'] = ModelsLog::STATUS_ERROR;
+                $logForDB['trace'] = "$time Error: " . $error_msg;
+                ModelsLog::addLog($logForDB);
+                return [
+                    'status' => false,
+                    'status_message' => "Connection Error",
+                    'data' => [],
+                ];
             }
             curl_close($ch);
             $response = @json_decode($res, true);
             $logForDB['status'] = ModelsLog::STATUS_SUCCESS;
             $logForDB['trace'] = json_encode($response);
+            Log::channel($log)->debug("$time Response: " . @json_encode($response));
         } catch (\Exception $e) {
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             $logForDB['trace'] = $e->getMessage();
             ModelsLog::addLog($logForDB);
+            Log::channel($log)->debug("$time " . "Unknown ERROR " . $e->getMessage());
 
             return [
                 'status' => false,
@@ -230,7 +260,8 @@ class _BGController
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             $logForDB['trace'] = "$time Status: Unknown";
             ModelsLog::addLog($logForDB);
-            
+            Log::channel($log)->debug("$time Status: Unknown");
+
             return [
                 'status' => false,
                 'status_message' => "Connection Error",
@@ -244,8 +275,10 @@ class _BGController
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             $logForDB['trace'] = $message;
 
+            Log::channel($log)->debug("$time Status: " . $response['error']['message']);
         } else {
             $message = "OK";
+            Log::channel($log)->debug("$time Status: OK");
         }
 
         return [

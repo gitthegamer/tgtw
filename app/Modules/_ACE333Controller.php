@@ -111,6 +111,9 @@ class _ACE333Controller
         if ($function == "api/gamelist") {
             return config('api.ACE333_H5_LOBBY_URL') . "api/Game/GameList/";
         }
+        if ($function == "api/accounttransactions3") {
+            return config('api.ACE333_REPORT_URL') . $function;
+        }
         return config('api.ACE333_URL') . $function;
     }
 

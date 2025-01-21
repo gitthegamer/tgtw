@@ -178,7 +178,7 @@ class _3WIN8Controller
             Log::channel($log)->debug("$time Raw Response: " . $responseBody);
             $response = json_decode($responseBody, true);
             $logForDB['status'] = ModelsLog::STATUS_SUCCESS;
-            $logForDB['trace'] = json_encode($response);
+            $logForDB['trace'] = $responseBody;
             Log::channel($log)->debug("$time Response: " . json_encode($response));
         } catch (Exception $e) {
             $logForDB['status'] = ModelsLog::STATUS_ERROR;

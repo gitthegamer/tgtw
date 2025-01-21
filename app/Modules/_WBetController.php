@@ -141,7 +141,6 @@ class _WBetController
             'method' => $method,
         ];
 
-
         $log = 'playboy_api_records';
         if ($function == "fetchbykey.aspx" || $function == "markbyjson.aspx") {
             $log = 'playboy_api_ticket_records';
@@ -153,18 +152,19 @@ class _WBetController
             $log = 'playboy_api_balance_records';
         }
 
-
         Log::channel($log)->debug("$time Function : " . $function);
         $this->create_param($function, $params);
 
         Log::channel($log)->debug("$time Params : " . json_encode($this->make_params($function)));
         try {
             $client = new \GuzzleHttp\Client();
+            $timeout = ($function == "fetchbykey.aspx" || $function == "markbyjson.aspx") ? 20 : 10;
             $response = $client->get($this->get_url($function), [
                 'on_stats' => function (\GuzzleHttp\TransferStats $stats) use ($time, $log) {
                     Log::channel($log)->debug("$time URL: " . $stats->getEffectiveUri());
                     Log::channel($log)->debug("$time Time: " . $stats->getTransferTime());
                 },
+                'timeout' => $timeout,
                 $function == 'markbyjson.aspx' ? 'body' : 'query' => $function == 'markbyjson.aspx' ? json_encode($this->make_params($function)) : $this->make_params($function),
             ]);
 

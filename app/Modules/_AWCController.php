@@ -2,8 +2,9 @@
 
 namespace App\Modules;
 
-use Exception;
 use App\Models\Log as ModelsLog;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class _AWCController
 {
@@ -20,6 +21,7 @@ class _AWCController
     protected $currency;
     protected $startTime;
     protected $endTime;
+
 
 
     public static function init($function, $params)
@@ -44,7 +46,6 @@ class _AWCController
     {
         switch ($function) {
             case "fetch/gzip/getTransactionByUpdateDate":
-              
                 return [
                     'cert' => $this->cert,
                     'agentId' => $this->agentId,
@@ -54,8 +55,7 @@ class _AWCController
                     'gameType' => $this->gameType
                 ];
             case "fetch/gzip/getTransactionByTxTime":
-              
-                return [
+                return [                    
                     'cert' => $this->cert,
                     'agentId' => $this->agentId,
                     'startTime' => $this->startTime,
@@ -64,7 +64,6 @@ class _AWCController
                     'currency' => $this->currency,
                 ];
             case "fetch/getSummaryByTxTimeHour":
-              
                 return [
                     'cert' => $this->cert,
                     'agentId' => $this->agentId,
@@ -88,15 +87,31 @@ class _AWCController
         ];
 
 
-        $this->create_param($function, $params);        
+        $this->create_param($function, $params);
+        if ($this->platform == 'SEXYBCRT') {
+            $productName = 'Sexy Baccarat';
+            $log = 'sexybcrt_api_ticket_records';
+        } elseif ($this->platform == 'PP') {
+            $productName = 'Pragmatic Play';
+            $log = 'pp_api_ticket_records';
+        } else {
+            $productName = 'Jili';
+            $log = 'jili_api_ticket_records';
+        }
+
+        Log::channel($log)->debug("$time Function : " . $function);
+
+        Log::channel($log)->debug("$time Params : " . json_encode($this->make_params($function)));
+        
         try {
             $client = new \GuzzleHttp\Client();
             $response = $client->post($this->get_url($function), [
                 'headers' => [
                     'Content-Type' => 'application/json' // Replace with the appropriate media type
                 ],
-                'on_stats' => function (\GuzzleHttp\TransferStats $stats) use ($time) {
-             
+                'on_stats' => function (\GuzzleHttp\TransferStats $stats) use ($time, $log) {
+                    Log::channel($log)->debug("$time URL: " . $stats->getEffectiveUri());
+                    Log::channel($log)->debug("$time Time: " . $stats->getTransferTime());
              
                 },
                 'query' => $this->make_params($function),
@@ -105,11 +120,13 @@ class _AWCController
             $response = @json_decode($response->getBody(), true);
             $logForDB['status'] = ModelsLog::STATUS_SUCCESS;
             $logForDB['trace'] = json_encode($response);
-            // ModelsLog::addLog($logForDB);
+            Log::channel($log)->debug("$time Response: " . json_encode($response));
+    
         } catch (Exception $e) {
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             $logForDB['trace'] = $e->getMessage();
             ModelsLog::addLog($logForDB);
+            Log::channel($log)->debug("$time " . "Unknown ERROR" . "$e");
  
             return [
                 'status' => false,
@@ -122,6 +139,7 @@ class _AWCController
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             $logForDB['trace'] = "$time Status: Unknown";
             ModelsLog::addLog($logForDB);
+            Log::channel($log)->debug("$time Status: Unknown");
          
             return [
                 'status' => false,
@@ -144,10 +162,10 @@ class _AWCController
 
     public static function getLocale()
     {
-        if (request()->lang == "en") {
+        if (app()->getLocale() == "en") {
             return "en";
         }
-        if (request()->lang == "cn") {
+        if (app()->getLocale() == "cn") {
             return "zh";
         }
         return "en";

@@ -125,13 +125,13 @@ class _ApolloController
             'method' => $method,
         ];
 
-        $log = 'Apollo_api_records';
+        $log = 'apollo_api_records';
         if ($function === "Tr_QueryGameJsonResult.aspx") {
-            $log = 'Apollo_api_ticket_records';
+            $log = 'apollo_api_ticket_records';
         } elseif ($function === "Tr_ChangeV.aspx" || $function === "Tr_singleV.aspx") {
-            $log = 'Apollo_api_transfer_records';
+            $log = 'apollo_api_transfer_records';
         } elseif ($function === "Tr_UserInfo.aspx") {
-            $log = 'Apollo_api_balance_records';
+            $log = 'apollo_api_balance_records';
         }
 
         Log::channel($log)->debug("$time Function : " . $function);
@@ -157,6 +157,7 @@ class _ApolloController
                     Log::channel($log)->debug("$time URL: " . $stats->getEffectiveUri());
                     Log::channel($log)->debug("$time Time: " . $stats->getTransferTime());
                 },
+                'timeout' => 30
             ]);
             $response = @json_decode($response->getBody()->getContents(), true);
             $logForDB['status'] = ModelsLog::STATUS_SUCCESS;
@@ -185,6 +186,7 @@ class _ApolloController
                 'data' => null,
             ];
         }
+
         if ($response['status'] != "0000") {
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             ModelsLog::addLog($logForDB);

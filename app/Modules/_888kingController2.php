@@ -155,13 +155,28 @@ class _888kingController2
             'method' => $method,
         ];
 
+        $log = '888king_api_records';
+        if ($function == "api/report") {
+            $log = '888king_api_ticket_records';
+        }
+        if ($function == "api/user/deposit-v2" || $function == "api/user/withdraw-v2" || $function == "api/user/wallet-trans-status") {
 
+            $log = '888king_api_transfer_records';
+        }
+        if ($function == "api/user/balance") {
+            $log = '888king_api_balance_records';
+        }
+        Log::channel($log)->debug("$time Function : " . $function);
         $this->create_param($function, $params);
+        Log::channel($log)->debug("$time Params : " . json_encode($this->make_params($function)));
 
         try {
             $client = new \GuzzleHttp\Client();
             $response = $client->get($this->get_url($function), [
-                'on_stats' => function (\GuzzleHttp\TransferStats $stats) use ($time) {},
+                'on_stats' => function (\GuzzleHttp\TransferStats $stats) use ($time, $log) {
+                    Log::channel($log)->debug("$time URL: " . $stats->getEffectiveUri());
+                    Log::channel($log)->debug("$time Time: " . $stats->getTransferTime());
+                },
                 'query' => $this->make_params($function),
                 'timeout' => $function == "api/report" ? 0 : 7, // 如果是 api/report，超时无限制，否则为7秒
             ]);
@@ -169,11 +184,14 @@ class _888kingController2
             $response = @json_decode($response->getBody(), true);
             $logForDB['status'] = ModelsLog::STATUS_SUCCESS;
             $logForDB['trace'] = json_encode($response);
+            // ModelsLog::addLog($logForDB);
+            Log::channel($log)->debug("$time Response: " . @json_encode($response));
         } catch (Exception $e) {
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             $logForDB['trace'] = $e->getMessage();
             ModelsLog::addLog($logForDB);
 
+            Log::channel($log)->debug("$time " . "Unknown ERROR" . "$e");
             return [
                 'status' => false,
                 'status_message' => "Unknown ERROR",
@@ -186,6 +204,7 @@ class _888kingController2
             $logForDB['trace'] = "$time Status: Unknown";
 
             ModelsLog::addLog($logForDB);
+            Log::channel($log)->debug("$time Status: Unknown");
             return [
                 'status' => false,
                 'status_message' => "Unknown ERROR",
@@ -194,6 +213,7 @@ class _888kingController2
         }
 
         if (isset($response['error'])) {
+            Log::channel($log)->debug("$time Status: " . $response['error']['message']);
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             ModelsLog::addLog($logForDB);
 
@@ -205,6 +225,7 @@ class _888kingController2
         }
 
         if (!isset($response['data'])) {
+            Log::channel($log)->debug("$time Status: Data Missing");
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             ModelsLog::addLog($logForDB);
 
@@ -216,6 +237,7 @@ class _888kingController2
         }
 
         if ($response['data']['status_code'] != 0) {
+            Log::channel($log)->debug("$time Status: " . SELF::ERROR_ARRAYS[$function][$response['data']['status_code']]);
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             ModelsLog::addLog($logForDB);
         }
@@ -229,10 +251,10 @@ class _888kingController2
 
     public static function getLocale()
     {
-        if (request()->lang == "en") {
+        if (app()->getLocale() == "en") {
             return "en";
         }
-        if (request()->lang == "cn") {
+        if (app()->getLocale() == "cn") {
             return "ch";
         }
         return "en";

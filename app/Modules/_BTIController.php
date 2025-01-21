@@ -172,10 +172,10 @@ class _BTIController
 
     public static function getLocale()
     {
-        if (request()->lang == "en") {
+        if (app()->getLocale() == "en") {
             return "en";
         }
-        if (request()->lang == "cn") {
+        if (app()->getLocale() == "cn") {
             return "zh";
         }
         if (request()->lang == "bm") {

@@ -140,6 +140,7 @@ class _918KayaController
                     Log::channel($log)->debug("$time Time: " . $stats->getTransferTime());
                 },
                 'body' => json_encode($this->make_params($function)),
+                'timeout' => 35, // 35 seconds
             ]);
 
             $response = @json_decode($response->getBody(), true);

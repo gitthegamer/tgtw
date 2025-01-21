@@ -2,13 +2,12 @@
 
 namespace App\Modules;
 
-use GuzzleHttp\Exception\RequestException;
-use App\Models\Log as ModelsLog;
 use Exception;
+use Illuminate\Support\Facades\Log;
+use App\Models\Log as ModelsLog;
 
 class _AdvantPlayController
 {
-
     const ERRORS = [
         0 => "Success",
         3 => "Parameter Error",
@@ -155,7 +154,21 @@ class _AdvantPlayController
             'method' => $method,
         ];
        
+
+        $log = 'advantplay_api_records';
+        if ($function == "GetBatchHistory") {
+            $log = 'advantplay_api_ticket_records';
+        }
+        if ($function == "TransferIn" || $function == "TransferOut") {
+            $log = 'advantplay_api_transfer_records';
+        }
+        if ($function == "GetBalance") {
+            $log = 'advantplay_api_balance_records';
+        }
+        Log::channel($log)->debug("$time Function : " . $function);
+
         $this->create_param($function, $params);
+        Log::channel($log)->debug("$time Params : " . json_encode($this->make_params($function)));
 
         try {
             $client = new \GuzzleHttp\Client();
@@ -163,17 +176,21 @@ class _AdvantPlayController
                 'headers' => [
                     'Content-Type' => 'application/json',
                 ],
-                'on_stats' => function (\GuzzleHttp\TransferStats $stats) use ($time) {
+                'on_stats' => function (\GuzzleHttp\TransferStats $stats) use ($time, $log) {
+                    Log::channel($log)->debug("$time URL: " . $stats->getEffectiveUri());
+                    Log::channel($log)->debug("$time Time: " . $stats->getTransferTime());
                 },
                 'body' => json_encode($this->make_params($function)),
             ]);
             $response = @json_decode($response->getBody(), true);
             $logForDB['status'] = ModelsLog::STATUS_SUCCESS;
             $logForDB['trace'] = json_encode($response);
+            Log::channel($log)->debug("$time Response: " . @json_encode($response));
         } catch (Exception $e) {
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             $logForDB['trace'] = $e->getMessage();
             ModelsLog::addLog($logForDB);
+            Log::channel($log)->debug("$time " . "Unknown ERROR" . "$e");
 
             return [
                 'status' => false,
@@ -186,6 +203,7 @@ class _AdvantPlayController
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             $logForDB['trace'] = "$time Status: Unknown";
             ModelsLog::addLog($logForDB);
+            Log::channel($log)->debug("$time Status: Unknown");
 
             return [
                 'status' => false,
@@ -198,8 +216,6 @@ class _AdvantPlayController
             $logForDB['status'] = ModelsLog::STATUS_ERROR;
             ModelsLog::addLog($logForDB);
         }
-
-       
 
         return [
             'status' => $response['ErrorCode'] == 0,
@@ -219,10 +235,10 @@ class _AdvantPlayController
 
     public static function getLocale()
     {
-        if (request()->lang == "en") {
+        if (app()->getLocale() == "en") {
             return "en-US";
         }
-        if (request()->lang == "cn") {
+        if (app()->getLocale() == "cn") {
             return "zh-CN";
         }
         return "en-US";

@@ -185,8 +185,10 @@ class _888kingController
             $log = '888king_api_balance_records';
         }
 
+        Log::channel($log)->debug("$time Function : " . $function);
         $this->create_param($function, $params);
 
+        Log::channel($log)->debug("$time Params : " . json_encode($this->make_params($function)));
         try {
             $ch = curl_init($this->get_url($function));
             curl_setopt($ch, CURLOPT_POST, 1);
@@ -199,7 +201,9 @@ class _888kingController
             }
             curl_close($ch);
             $response = @json_decode($res, true);
+            Log::channel($log)->debug("$time Response: " . @json_encode($response));
         } catch (\Exception $e) {
+            Log::channel($log)->debug("$time " . "Unknown ERROR" . "$e");
             return [
                 'status' => false,
                 'status_message' => "Unknown ERROR",
@@ -208,6 +212,7 @@ class _888kingController
         }
 
         if (!$response) {
+            Log::channel($log)->debug("$time Status: Unknown");
             return [
                 'status' => false,
                 'status_message' => SELF::ERROR_ARRAYS[$function][$response['Code']] ?? "Unknown ERROR",
@@ -216,7 +221,9 @@ class _888kingController
         }
 
         if (isset($response['Code']) && $response['Code'] != "100") {
+            Log::channel($log)->debug("$time Status: " . SELF::ERROR_ARRAYS[$function][$response['Code']]);
         } else {
+            Log::channel($log)->debug("$time Status: Success");
         }
 
         return [
